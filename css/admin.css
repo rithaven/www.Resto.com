@@ -41,14 +41,14 @@ table tr td{
     background-color: #3742fa ;
 }
 .btn-secondary{
-    background-color: #1eff7c;
+    background-color: #7bed9f;
     padding: 1%;
     color: white;
     text-decoration: none;
     font-weight: bold;
 }
 .btn-secondary:hover{
-    background-color: #2ed5cd ;
+    background-color: #3742fa ;
 }
 .btn-danger{
     background-color:#ff6b81;
