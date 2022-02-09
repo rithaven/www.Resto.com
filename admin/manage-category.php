@@ -19,31 +19,89 @@
                <a href="<?php echo SITEURL; ?>admin/add-category.php" class="btn-primary">Add Category</a>
                <br /><br />
                <table class="tbl-full">
-                   <tr>
+               <tr>
                    <th>S.N</th>
-                   <th>Full Name</th>
-                   <th>User Name</th>
+                   <th>Title</th>
+                   <th>Image</th>
+                   <th>Featured</th>
+                   <th>Active</th>
                    <th>Actions</th>
-                    </tr>
+                </tr>
+               <?php
+               //Query to Get all Categories from Database
+               $sql = "SELECT * FROM tbl_category";
+
+               //Execute Query
+               $res = mysqli_query($conn, $sql);
+
+               //Count Rows
+               $count = mysqli_num_rows($res);
+                
+               //Create Serial Number Variable and assign value as 1
+               $sn=1;
+               //check whether we have data in database or not
+               if($count>0)
+               {
+                   //we have data in Database
+                   // get the data and display
+                   while($row=mysqli_fetch_assoc($res))
+                   {
+                       $id = $row['id'];
+                       $title = $row['title'];
+                       $image_name = $row['image_name'];
+                       $featured = $row['featured'];
+                       $active = $row['active'];
+
+                       ?>
+                     
 
                      <tr>
+                         <td><?php echo $sn++;?></td> 
+                         <td><?php echo $title; ?></td>
+                         
                          <td>
+                            <?php
+                          //check whether image name is available or not 
+                           if($image_name!="")
+                           {
+                               //Display the Image
+                               ?>
+                               <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name ?>" width="100px">
+                               <?php
+                           }
+                           else
+                           {
+                               //Display the Message
+                               echo "<div class='error'> Image not Added";
 
-                         </td>
+                           }
+                           ?>
+                          </td>
+                         <td><?php echo $featured; ?></td> 
+                         <td><?php echo $active; ?></td>        
+                         
                          <td>
-
-                         </td>
-                         <td>
-
-                         </td>        
-                        <td>
               
-                        <a href="#" class="btn-secondary">Update Admin</a>
-                        <a href="#" class="btn-danger">Delete Admin</a> 
+                        <a href="#" class="btn-secondary">Update Category</a>
+                        <a href="#" class="btn-danger">Delete Category </a> 
                         </td>
                         </tr>
-                         
-                   
+                       <?php
+                   }
+                }
+               else
+               {
+                   //We do not have data
+                   //we'll display the message inside table
+                        ?>
+                        <tr>
+                            <td colspan="6"><div class="error">No Category Added</div></td>
+                        </tr>
+                        <?php
+               }
+
+               ?>
+                
                </table>
         </div>
 </div>
